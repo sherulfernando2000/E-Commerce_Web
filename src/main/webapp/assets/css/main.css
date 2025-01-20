@@ -1,0 +1,65 @@
+.cart{
+    border:none;
+    padding: 0%;
+}
+
+
+
+#header{
+    background: url(../../images/onur-binay-OKjJZNTl004-unsplash.jpg) top/COVER no-repeat;
+    height: 100vh;
+    
+}
+
+.btn{
+    background-color: white;
+    color: black;
+    padding: auto;
+    border-radius: 25px;
+    border: 1px solid black
+}
+
+.btn:hover{
+    background-color: black;
+    color: white;
+}
+
+.text-card{
+    background-color: rgba(0, 0, 0, 0.521);
+    padding: 10px 5px;
+    border-radius: 25px;
+   
+
+}
+
+.collection-list{
+    justify-content: space-around;
+}
+
+.active-filter-btn{
+    background-color: black;
+    color: white;
+}
+
+.collection-img span{
+    top:0%;
+    right: 0;
+}
+
+.phone-card{
+    background-color: rgba(0, 0, 0, 0.096);
+    padding: 5px 5px;
+    border-radius: 3px;
+}
+
+.phone-card:hover{
+    background-color: rgba(0, 0, 0, 0.945);
+    color: antiquewhite;
+
+}
+
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
