@@ -1,3 +1,10 @@
+:root{
+    --lg-font: 'Kaisei Tokumin', serif;
+    --sm-font: 'Poppins', sans-serif;
+    --yellow: #edbb20;
+}
+
+
 .cart{
     border:none;
     padding: 0%;
@@ -21,7 +28,15 @@
 
 .btn:hover{
     background-color: black;
-    color: white;
+    color: var(--yellow);
+}
+
+.navWord:hover{
+    color: var(--yellow);
+}
+
+.active{
+    color: var(--yellow) !important;
 }
 
 .text-card{
@@ -58,8 +73,43 @@
 
 }
 
+
+/* title */
+.title h2::before{
+    position: absolute;
+    content: "";
+    width: 4px;
+    height: 50px;
+    background-color: var(--yellow);
+    left: -20px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/*products*/
+
+.text-primary{
+    color: var(--yellow) !important;
+}
+
+.btn-addToCart{
+    background-color: var(--yellow) !important;
+    color: black;
+    border-color: var(--yellow) !important;
+}
+
+tr:hover{
+    background-color: rgb(186, 186, 14);
+    cursor: pointer;
+}
+
+
 @media (min-width: 1025px) {
     .h-custom {
     height: 100vh !important;
     }
     }
+
+

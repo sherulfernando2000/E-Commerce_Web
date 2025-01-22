@@ -1,6 +1,7 @@
 package lk.ijse.ecommerce_web;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +13,12 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/products")
 @MultipartConfig(
@@ -67,23 +74,67 @@ public class ProductServlet extends HttpServlet {
                     stmt.setString(6, UPLOAD_DIR + "/" + fileName); // Save relative path
                     int i = stmt.executeUpdate();
                     if (i>0) {
-                        resp.sendRedirect("admin/products.jsp?message=product saved successfully");
+                        resp.sendRedirect("products?message=product saved successfully");
                     } else {
-                        resp.sendRedirect("admin/products.jsp?error=product not saved");
+                        resp.sendRedirect("products?error=product not saved");
                     }
 
 
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new ServletException("Database error: " + e.getMessage());
+                resp.sendRedirect("products?error=product not saved");
+            }finally {
+
             }
+
         }
 
         // Respond with success
         /*resp.setContentType("text/html");
         resp.getWriter().write("<h3>Product added successfully with image!</h3>");*/
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("doget in product_list");
+
+        List<Product> products = new ArrayList<>();
+
+        try( Connection connection = dataSource.getConnection()) {
+            PreparedStatement pstm = connection.prepareStatement("Select * from products");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                double price = rs.getDouble(3);
+                int quantity = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                String description = rs.getString(6);
+                String image_path = rs.getString(7);
+
+                Product product = new Product(id, name, price, quantity, categoryId, description, image_path);
+
+                products.add(product);
+
+            }
+
+            req.setAttribute("products", products);
+            RequestDispatcher rd = req.getRequestDispatcher("admin/products.jsp");
+            rd.forward(req,resp);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.sendRedirect(
+                    "admin/product.jsp?error= products not load"
+            );
+
+        }
 
     }
+
+
+
+
 }

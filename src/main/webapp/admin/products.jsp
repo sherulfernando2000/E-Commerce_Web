@@ -1,4 +1,5 @@
-<%--
+<%@ page import="lk.ijse.ecommerce_web.Product" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
   Date: 1/19/2025
@@ -22,6 +23,15 @@
             cursor: pointer;
         }
 
+        tr:hover{
+            background-color: rgb(232, 178, 74);
+            cursor: pointer;
+
+        }
+
+        #productTableBody tr.active {
+            background-color: #e8b24a;
+        }
 
     </style>
 
@@ -40,10 +50,10 @@
                     <a class="nav-link" href="products.jsp">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="customers.jsp">Customers</a>
+                    <a class="nav-link" href="admin/customers.jsp">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="orders.jsp">Order Details</a>
+                    <a class="nav-link" href="admin/orders.jsp">Order Details</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../index.jsp">User</a>
@@ -56,7 +66,7 @@
 
 <div class="container mt-5">
     <h1 class="text-center">Product Management</h1>
-    <form  action="../products" method="post" id="productForm" class="mt-4" enctype="multipart/form-data">
+    <form  action="products" method="post" id="productForm" class="mt-4" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="productName" class="form-label">Product Name</label>
@@ -76,9 +86,9 @@
                 <label for="productCategory" class="form-label">Category</label>
                 <select id="productCategory" class="form-select" name="category">
                     <option selected disabled>Select category</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="clothing">Clothing</option>
-                    <option value="home_appliances">Home Appliances</option>
+                    <option value="electronics">Iphones</option>
+                    <option value="clothing">Samsung</option>
+                    <option value="home_appliances">X-Honor</option>
                 </select>
             </div>
         </div>
@@ -120,6 +130,52 @@
         </div>
     </form>
 
+    <div class="modal fade" id="update_modal" tabindex="-1" aria-labelledby="update_modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container m-2">
+                        <form action="products-update" method="post">
+                            <div class="mb-3">
+                                <label for="update_procut_id" class="form-label">Product Id</label>
+                                <input type="text" class="form-control" id="update_procut_id" name="update_product_id" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_product_name" class="form-label">Product Name</label>
+                                <input type="text" class="form-control" id="update_product_name" name="update_product_name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_product_price" class="form-label">Product Price</label>
+                                <input type="text" class="form-control" id="update_product_price" name="update_product_price" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_qty" class="form-label">Product Quantity</label>
+                                <input type="text" class="form-control" id="update_qty" name="update_qty">
+                            </div>
+                            <%--category--%>
+                            <div class="col-md-6">
+                                <label for="update_product_category" class="form-label">Category</label>
+                                <select id="update_product_category" class="form-select" name="update_product_category">
+                                    <option selected disabled>Select category</option>
+                                    <option value="iphones">Iphones</option>
+                                    <option value="samsung">Samsung</option>
+                                    <option value="x-honor">X-Honor</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="update_product_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="update_product_description" name="update_product_description" rows="3" placeholder="Enter product description" name="description"></textarea>
+                            </div>
+                            <button id="btn_update_user" type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="mt-5">
         <h2 class="text-center">Product List</h2>
         <table class="table table-bordered mt-3">
@@ -137,6 +193,38 @@
             </thead>
             <tbody id="productTableBody">
             <!-- Dynamic rows will be added here -->
+            <%
+                List<Product> dataList = (List<Product>) request.getAttribute("products");
+                if (dataList != null && !dataList.isEmpty()) {
+                    for (Product product : dataList) {
+
+            %>
+
+            <tr>
+                <td><%=product.getId()%></td>
+                <td><%=product.getName()%></td>
+                <td><%=product.getPrice()%></td>
+                <td><%=product.getQuantity()%></td>
+                <td><%=product.getCategoryId()%></td>
+                <td><%=product.getDescription()%></td>
+                <td><img src="<%=product.getImage_path()%>" width="20px" height="30px"></td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editUser('<%=product.getId()%>','<%=product.getName()%>','<%=product.getPrice()%>','<%=product.getQuantity()%>','<%=product.getCategoryId()%>','<%=product.getDescription()%>')">Edit</button>
+                    <a href="product-delete?id=<%=product.getId()%>" ><button class='btn btn-danger btn-sm deleteProduct' data-index=`<%=product.getId()%>`>Delete</button></a>
+<%--                    <button  onclick="confirmDelete(event,product.getId() )"><button class='btn btn-danger btn-sm deleteProduct' data-index=`<%=product.getId()%>`>Delete</button></button>--%>
+                </td>
+
+
+
+            </tr>
+
+            <%
+                }
+                }
+            %>
+
+
+
             </tbody>
         </table>
     </div>
@@ -147,95 +235,33 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function () {
-        let productArray = [];
 
-        function renderTable() {
-            let tableBody = "";
-            productArray.forEach((product, index) => {
-                tableBody += `<tr>
-                        <td>${index + 1}</td>
-                        <td>${product.name}</td>
-                        <td>${product.price}</td>
-                        <td>${product.quantity}</td>
-                        <td>${product.category}</td>
-                        <td>${product.description}</td>
-                        <td><img src="${product.image}" alt="Product Image" style="width: 50px; height: 50px;"></td>
-                        <td>
-                            <button class='btn btn-primary btn-sm editProduct' data-index='${index}'>Edit</button>
-                            <button class='btn btn-danger btn-sm deleteProduct' data-index='${index}'>Delete</button>
-                        </td>
-                    </tr>`;
-            });
-            $("#productTableBody").html(tableBody);
-        }
-
-      /*  $("#saveProduct").click(function () {
-            const product = {
-                name: $("#productName").val(),
-                price: $("#productPrice").val(),
-                quantity: $("#productQuantity").val(),
-                category: $("#productCategory").val(),
-                description: $("#productDescription").val(),
-                image: URL.createObjectURL($("#productImage")[0].files[0])
-            };
-
-            productArray.push(product);
-            renderTable();
-            $("#productForm")[0].reset();
-        });document
-*/
-        $(document).on("click", ".deleteProduct", function () {
-            const index = $(this).data("index");
-            productArray.splice(index, 1);
-            renderTable();
-        });
-
-        $(document).on("click", ".editProduct", function () {
-            const index = $(this).data("index");
-            const product = productArray[index];
-
-            $("#productName").val(product.name);
-            $("#productPrice").val(product.price);
-            $("#productQuantity").val(product.quantity);
-            $("#productCategory").val(product.category);
-            $("#productDescription").val(product.description);
-
-            $("#updateProduct").off("click").on("click", function () {
-                productArray[index] = {
-                    name: $("#productName").val(),
-                    price: $("#productPrice").val(),
-                    quantity: $("#productQuantity").val(),
-                    category: $("#productCategory").val(),
-                    description: $("#productDescription").val(),
-                    image: product.image
-                };
-
-                renderTable();
-                $("#productForm")[0].reset();
-            });
-        });
-    });
+    const editUser = (productId,name,price,quantity,category,description) => {
+        $('#update_procut_id').val(productId)
+        $('#update_product_name').val(name)
+        $('#update_product_price').val(price)
+        $('#update_qty').val(quantity)
+        $('#update_product_category').val('Iphone')
+        $('#update_product_description').val(description)
 
 
-    // JavaScript function to preview the uploaded image
-    /*function previewImage(event) {
-        const file = event.target.files[0]; // Get the selected file
-        const preview = document.getElementById('imagePreview'); // Get the preview element
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result; // Set the preview source to the image file
-                preview.style.display = 'block'; // Make the image preview visible
-            };
-            reader.readAsDataURL(file); // Read the file as a Data URL
-        } else {
-            preview.src = '#'; // Reset the preview
-            preview.style.display = 'none'; // Hide the preview
-        }
+        $('#update_modal').modal('show')
     }
-*/
+
+   function confirmDelete(event, url) {
+       console.log(url)
+       event.preventDefault(); // Prevent the default action (navigation)
+       if (confirm("Are you sure you want to delete this item?")) {
+           // If the user confirms, navigate to the servlet
+           console.log(url);
+           // http://localhost:8080/E_Commerce_Web_war_exploded/product-delete?id=
+           window.location.href = url;
+       }
+       // If the user cancels, simply return false
+       return false;
+   }
+
 
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
@@ -282,12 +308,132 @@
     }
 
 
+        /*====details fill when table row clicked====*/
 
+        $("#productTableBody").on('click','tr',function () {
+            console.log("clicked");
+            productIndex = $(this).index();
+
+
+            // Remove 'active' class from all rows
+            $("#productTableBody tr").removeClass("active");
+
+            // Add 'active' class to the clicked row
+            $(this).addClass("active");
+
+
+            // Extract data from the clicked row
+            let productId = $(this).find('td:nth-child(1)').text().trim();
+            let productName = $(this).find('td:nth-child(2)').text().trim();
+            let productPrice = $(this).find('td:nth-child(3)').text().trim();
+            let productQuantity = $(this).find('td:nth-child(4)').text().trim();
+            let productCategory = $(this).find('td:nth-child(5)').text().trim();
+            let productDescription = $(this).find('td:nth-child(6)').text().trim();
+
+            // Set the data into input fields
+            $('#productName').val(productName);
+            $('#productPrice').val(productPrice);
+            $('#productQuantity').val(productQuantity);
+            $('#productCategory').val(productCategory);
+            $('#productDescription').val(productDescription);
+
+
+
+        })
+
+   /* $(document).ready(function () {
+          let productArray = [];
+
+          function renderTable() {
+              let tableBody = "";
+              productArray.forEach((product, index) => {
+                  tableBody += `<tr>
+                          <td>${index + 1}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td>${product.quantity}</td>
+                        <td>${product.category}</td>
+                        <td>${product.description}</td>
+                        <td><img src="${product.image}" alt="Product Image" style="width: 50px; height: 50px;"></td>
+                        <td>
+                            <button class='btn btn-primary btn-sm editProduct' data-index='${index}'>Edit</button>
+                            <button class='btn btn-danger btn-sm deleteProduct' data-index='${index}'>Delete</button>
+                        </td>
+                    </tr>`;
+            });
+            $("#productTableBody").html(tableBody);
+        }*/
+
+   /*  $("#saveProduct").click(function () {
+         const product = {
+             name: $("#productName").val(),
+             price: $("#productPrice").val(),
+             quantity: $("#productQuantity").val(),
+             category: $("#productCategory").val(),
+             description: $("#productDescription").val(),
+             image: URL.createObjectURL($("#productImage")[0].files[0])
+         };
+
+         productArray.push(product);
+         renderTable();
+         $("#productForm")[0].reset();
+     });document
+*/
+   /*$(document).on("click", ".deleteProduct", function () {
+       const index = $(this).data("index");
+       productArray.splice(index, 1);
+       renderTable();
+   });
+
+   $(document).on("click", ".editProduct", function () {
+       const index = $(this).data("index");
+       const product = productArray[index];
+
+       $("#productName").val(product.name);
+       $("#productPrice").val(product.price);
+       $("#productQuantity").val(product.quantity);
+       $("#productCategory").val(product.category);
+       $("#productDescription").val(product.description);
+
+       $("#updateProduct").off("click").on("click", function () {
+           productArray[index] = {
+               name: $("#productName").val(),
+               price: $("#productPrice").val(),
+               quantity: $("#productQuantity").val(),
+               category: $("#productCategory").val(),
+               description: $("#productDescription").val(),
+               image: product.image
+           };
+
+           renderTable();
+           $("#productForm")[0].reset();
+       });
+   });
+});
+*/
+
+   // JavaScript function to preview the uploaded image
+   /*function previewImage(event) {
+       const file = event.target.files[0]; // Get the selected file
+       const preview = document.getElementById('imagePreview'); // Get the preview element
+
+       if (file) {
+           const reader = new FileReader();
+           reader.onload = function (e) {
+               preview.src = e.target.result; // Set the preview source to the image file
+               preview.style.display = 'block'; // Make the image preview visible
+           };
+           reader.readAsDataURL(file); // Read the file as a Data URL
+       } else {
+           preview.src = '#'; // Reset the preview
+           preview.style.display = 'none'; // Hide the preview
+       }
+   }
+*/
 
 
 
 </script>
-
 
 
 </body>

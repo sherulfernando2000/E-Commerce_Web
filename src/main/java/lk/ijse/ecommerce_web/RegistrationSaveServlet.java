@@ -26,8 +26,7 @@ public class RegistrationSaveServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        try {
-            Connection connection = dataSource.getConnection();
+        try( Connection connection = dataSource.getConnection()) {
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO users(userName,email,password,role) VALUES (?,?,?,?) ");
             pstm.setString(1,userName);
             pstm.setString(2,email);

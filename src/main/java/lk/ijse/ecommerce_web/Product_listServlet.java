@@ -29,8 +29,8 @@ public class Product_listServlet extends HttpServlet {
 
         List<Product> products = new ArrayList<>();
 
-        try {
-            Connection connection = dataSource.getConnection();
+        try(Connection connection = dataSource.getConnection();) {
+
             PreparedStatement pstm = connection.prepareStatement("Select * from products");
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
@@ -63,3 +63,9 @@ public class Product_listServlet extends HttpServlet {
 
     }
 }
+
+
+
+
+
+
