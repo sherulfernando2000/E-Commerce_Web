@@ -34,23 +34,28 @@ public class SignInServlet extends HelloServlet {
 
                 ResultSet rs = pstm.executeQuery();
                 if (rs.next() ) {
+                    Object userId = rs.getObject(3);
+                    System.out.println("userId"+ userId);
                     if (password.equals(rs.getString(1))) {
                         if (rs.getString(2).equals("admin")) {
-                            Object userId = rs.getObject(3);
-                          /*  HttpSession session = req.getSession();     //new add 2 line
-                            session.setAttribute("userId", userId);*/
+                            /*Object userId = rs.getObject(3);*/
+                            System.out.println("userId"+ userId);
+                            HttpSession session = req.getSession();     //new add 2 line
+                            session.setAttribute("userId", userId);
 
                             resp.sendRedirect("products");  //admin/products.jsp?message=login successfully
                         }else{
-                            resp.sendRedirect("signin?message=user login success");
+                            HttpSession session = req.getSession();     //new add 2 line
+                            session.setAttribute("userId", userId);
+                            resp.sendRedirect("index.jsp?message=user login success");
                         }
 
 
                     }else {
-                        resp.sendRedirect("signin?error=wrong email or password");
+                        resp.sendRedirect("index.jsp?error=wrong email or password");
                     }
                 }else{
-                    resp.sendRedirect("signin?error=wrong email or password");
+                    resp.sendRedirect("index.jsp?error=wrong email or password");
                 }
 
 

@@ -83,14 +83,6 @@
 
             %>
 
-            <%--<h6><%=product.getId()%></h6>
-            <h6><%=product.getName()%></h6>
-            <h6><%=product.getPrice()%></h6>
-            <h6><%=product.getImage_path()%></h6>
-            <img src="<%=product.getImage_path()%>" width="200px" height="200px">--%>
-
-
-
 
             <%--Card with for loop--%>
                 <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-1  best phone-card ">
@@ -109,12 +101,12 @@
                         <p class="text-capitalize my-1"><%=product.getName()%></p>
                         <span class="fw-bold"><span>Rs.</span><%=product.getPrice()%></span>
                         <div id="counter">
-                            <button id="decrease" class="btn-counter rounded-circle">-</button>
-                            <span id="display">0</span>
-                            <button id="increase" class="btn-counter rounded-circle">+</button>
+                            <button id="decrease-<%=product.getId()%>" class="btn-counter rounded-circle">-</button>
+                            <span id="display-<%=product.getId()%>">0</span>
+                            <button id="increase-<%=product.getId()%>" class="btn-counter rounded-circle">+</button>
                         </div>
 
-                        <button type="button" class=" btn-addToCart mt-1 rounded">Add to cart</button>
+                        <button type="button" class=" btn-addToCart mt-1 rounded" onclick="addToCart('<%=product.getId()%>')">Add to cart</button>
                     </div>
                 </div>
 
@@ -296,7 +288,79 @@
 <script src="assets/css/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery-3.7.1.js"></script>
 <script src="assets/js/script.js"></script>
+<script>
+    /*$(document).ready(function () {
+        let count = 0;
 
+        $("#increase").click(function () {
+            count++;
+            $("#display").text(count);
+        });
+
+        $("#decrease").click(function () {
+            count--;
+            $("#display").text(count);
+        });
+    });
+
+*/
+
+    $(document).ready(function () {
+        $(".btn-counter").click(function () {
+            const buttonId = $(this).attr("id"); // Get the clicked button's ID
+            let productId = buttonId.split("-")[1]; // Extract the product ID
+
+            const displayId = "#display-"+productId; // ID of the display element
+
+            let count = parseInt($(displayId).text());
+
+            if (buttonId.startsWith("increase")) {
+                count++;
+            } else if (buttonId.startsWith("decrease")) {
+                if (count > 0) {
+                    count--;
+                }
+            }
+
+            $(displayId).text(count); // Update the quantity display
+        });
+    });
+
+
+
+    const addToCart = (productId)=>{
+
+        /*let quantity = $("#display").text();
+        console.log("qty"+ quantity);*/
+
+        const displayId = "#display-"+productId;
+        const quantity = $(displayId).text(); // Get the quantity from the correct span
+
+        console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
+        alert("item added sucessfully")
+
+        $.ajax({
+            url: 'cart',
+            type:'POST',
+            data:JSON.stringify({
+                productId: productId,
+                productQty: quantity
+            }),
+            success:function (resp){
+                if (data.status === 'success') {
+                    alert('Product added to cart successfully!');
+                } else {
+                    alert('Failed to add product to cart.');
+                }
+            },
+            error:function (xhr, status, error) {
+                console.error('Error:', error);
+                alert('An error occurred while adding the product to the cart.');
+            }
+        });
+    }
+
+</script>
 
 </body>
 </html>

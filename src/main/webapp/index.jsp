@@ -13,6 +13,19 @@
           integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-9/assets/css/registration-9.css">
+    <style>
+        /* Styling for video zoom effect */
+        #autoPlayVideo {
+            transition: transform 0.5s ease; /* Smooth transition effect */
+        }
+
+        #autoPlayVideo:hover {
+            transform: scale(0.90); /* Zoom in by 5% on hover */
+            cursor: pointer; /* Optional: change cursor to pointer */
+            border-radius:2% ;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -162,6 +175,20 @@
     </div>
 </section>
 
+<%-- Responsive Video Section --%>
+<section id="video-section" class="py-0">
+    <div class="container-fluid p-0">
+        <video
+                id="autoPlayVideo"
+                src="images/large.mp4"
+                muted
+                autoplay
+                playsinline
+                loop
+                style="width: 100%; height: auto; display: block;">
+        </video>
+    </div>
+</section>
 
 
 
