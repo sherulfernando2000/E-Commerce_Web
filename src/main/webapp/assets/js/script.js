@@ -3,7 +3,16 @@ const fetchData = () => {$.ajax({
     type:'GET',
     success:(resp)=>{
         console.log("resp"+resp);
+        // Clear existing cards before appending new ones
+        $("#cardsBody").empty();
+
+        let subtotal = 0; // Initialize subtotal
+
         resp.map((product)=>{
+
+            // Calculate subtotal (price * quantity for each product)
+            subtotal += product.price * product.quantity;
+
             //console.log(product)
             $("#cardsBody").append(`
                         <div  class="card mb-3 id="card-${product.id}">
@@ -36,6 +45,17 @@ const fetchData = () => {$.ajax({
 
         })
 
+        // Update the payment section
+        const shippingCost = 0; // Replace with a dynamic value if needed
+        const total = subtotal + shippingCost;
+
+        // Dynamically update the payment section
+        $(".subtotal-amount").text(`Rs. ${subtotal.toFixed(2)}`);
+        $(".shipping-amount").text(`Rs. ${shippingCost.toFixed(2)}`);
+        $(".total-amount").text(`Rs. ${total.toFixed(2)}`);
+        $(".checkout-btn span:first-child").text(`Rs. ${total.toFixed(2)}`);
+
+
     },
     error:(err)=>{
         console.error("Error loading products:", xhr.responseText, error);
@@ -60,6 +80,7 @@ $(document).on("click", ".delete-product", function () {
                 // Remove the card from the DOM
                 $(cardId).remove();
                 alert("Product removed successfully.");
+                fetchData();
             } else {
                 alert("Failed to remove product.");
             }

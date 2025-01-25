@@ -19,7 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet(name = "CartServlet", value = "/cart")
+@WebServlet(name = "CartServlet", value = "/cart/*")
 public class CartServlet extends HttpServlet {
     @Resource(name= "java:comp/env/jdbc/pool")
     private DataSource dataSource;
@@ -75,6 +75,7 @@ public class CartServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
             int userId = (int) session.getAttribute("userId");
+            System.out.println("userId"+ userId);
             PreparedStatement pstm = connection.prepareStatement("select * from cart where userId = ?");
             pstm.setInt(1, userId);
             ResultSet resultSet = pstm.executeQuery();
@@ -151,6 +152,7 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("delete in cart servlet");
         int productId = Integer.parseInt(req.getPathInfo().substring(1)); // Extract product ID from URL
         PrintWriter writer = resp.getWriter();
         resp.setContentType("application/json");

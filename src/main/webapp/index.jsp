@@ -17,12 +17,36 @@
         /* Styling for video zoom effect */
         #autoPlayVideo {
             transition: transform 0.5s ease; /* Smooth transition effect */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video covers the entire area */
+            z-index: -1; /* Places the video behind other content */
         }
 
-        #autoPlayVideo:hover {
+        #autoPlayVideo,.content:hover {
             transform: scale(0.90); /* Zoom in by 5% on hover */
             cursor: pointer; /* Optional: change cursor to pointer */
             border-radius:2% ;
+        }
+
+        #video-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden; /* Prevent scrollbars from appearing */
+        }
+
+
+
+        .content {
+            position: relative; /* Keeps content above the video */
+            top: 300px;
+            z-index: 1;
+            color: white; /* Adjust text color for readability */
+            text-align: center;
+            padding: 20px;
         }
     </style>
 
@@ -153,6 +177,32 @@
 <!-- end of special products -->
 
 
+<%-- Responsive Video Section --%>
+<section id="video-section" class="py-0">
+    <div class="container-fluid p-0">
+        <video
+                id="autoPlayVideo"
+                src="images/large.mp4"
+                muted
+                autoplay
+                playsinline
+                loop
+                style="width: 100%; height: auto; display: block;">
+        </video>
+
+        <div class="content">
+            <h1>Welcome to SD TECH</h1>
+            <p>your premier destination for corporate mobile solutions in Sri Lanka!</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
 <%-- welcome section--%>
 
 <section id = "special" class = "py-5">
@@ -174,24 +224,6 @@
 
     </div>
 </section>
-
-<%-- Responsive Video Section --%>
-<section id="video-section" class="py-0">
-    <div class="container-fluid p-0">
-        <video
-                id="autoPlayVideo"
-                src="images/large.mp4"
-                muted
-                autoplay
-                playsinline
-                loop
-                style="width: 100%; height: auto; display: block;">
-        </video>
-    </div>
-</section>
-
-
-
 
 
 
