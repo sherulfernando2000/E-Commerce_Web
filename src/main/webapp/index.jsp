@@ -34,7 +34,7 @@
 <!-- Nav bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">SD TECH</a>
+        <a class="navbar-brand" href="#">SD TECHW</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,12 +42,12 @@
         <div class="collapse navbar-collapse  justify-content-end " id="navbarNavAltMarkup">
             <div class="navbar-nav position-relative d-flex justify-content-around">
 
-                <a class="nav-link active navWord" aria-current="page" href="#">Home</a>
-                <a class="nav-link navWord" href="product-list">Products</a>
+                <a class="nav-link active navWord navTopic" aria-current="page" href="#">Home</a>
+                <a class="nav-link navWord navTopic" href="product-list">Products</a>
 
-                <a class="nav-link" href="">About us</a>
-                <a class="nav-link" href="#">Blog</a>
-                <a class="nav-link" href="cart.jsp">
+                <a class="nav-link navTopic" href="">About us</a>
+                <a class="nav-link navTopic" href="#">Blog</a>
+                <a class="nav-link navTopic" href="cart.jsp">
                     <div class="d-flex align-items-center" style="background-color:#212529">
                         <button type="button" class="btn-position-relative cart" style="background-color: #212529">
                             <i class="fa fa-shopping-cart " style="color: white; background-color: #212529"></i>
@@ -57,8 +57,8 @@
                     </div>
 
                 </a>
-                <a class="nav-link  ms-2" aria-current="page" href="signin.jsp">Login/Register</a>
-                <a class="nav-link  ms-2" aria-current="page" href="products">admin</a>
+                <a class="nav-link  ms-2 navTopic" aria-current="page" href="signin.jsp">Login/Register</a>
+                <a class="nav-link  ms-2 navTopic" aria-current="page" href="products">admin</a>
             </div>
         </div>
     </div>
