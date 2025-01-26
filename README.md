@@ -1,5 +1,8 @@
 # E-commerce Web Application
 
+## YouTube video
+YouTube video:https://youtu.be/pugb4j0PQkU
+
 ## Overview
 This project is a comprehensive e-commerce web application designed for a phone shop. Built using HTML, CSS, JavaScript, JSP, JavaEE, and MySQL, it offers a smooth and interactive user experience.
 
@@ -34,8 +37,7 @@ Administrators can manage the system through various pages, including:
 This architecture ensures scalability, flexibility, and performance for an enterprise-level web application.
 
 
-## YouTube video
-YouTube video:https://youtu.be/pugb4j0PQkU
+## Screenshots
 ![Screenshot (151)](https://github.com/user-attachments/assets/6b11e946-c692-4756-ae88-1434587d91fc)
 ![Screenshot (156)](https://github.com/user-attachments/assets/76a6c913-c3cf-4844-8006-37d18ae4a29f)
 ![Screenshot (155)](https://github.com/user-attachments/assets/902af10e-9353-413a-9d25-0eb2f4021d4f)
