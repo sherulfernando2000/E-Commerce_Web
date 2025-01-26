@@ -1,4 +1,4 @@
-<%@ page import="lk.ijse.ecommerce_web.Order" %>
+<%@ page import="lk.ijse.ecommerce_web.entity.Order" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
@@ -13,11 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="assets/css/adminStyle.css">
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Admin Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,11 @@
                     <a class="nav-link" href="categories">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="orderDetailsServlet">Order Details</a>
+                    <a class="nav-link active" href="orderDetailsServlet">Order Details</a>
                 </li>
-
             </ul>
+            <a class=" logo ms-auto " href="#">SD TECH</a>
+
         </div>
     </div>
 </nav>

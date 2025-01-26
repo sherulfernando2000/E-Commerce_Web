@@ -1,4 +1,4 @@
-<%@ page import="lk.ijse.ecommerce_web.Product" %>
+<%@ page import="lk.ijse.ecommerce_web.entity.Product" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
@@ -60,7 +60,23 @@
                     </div>
 
                 </a>
-                <a class="nav-link  ms-2" aria-current="page" href="registration-save.jsp">Login/Register</a>
+                <!-- Check session for user details -->
+                <%
+                    String userName = (String) session.getAttribute("userName");
+                    System.out.println("user"+userName);
+                    if (userName != null) {
+
+                %>
+                <!-- User is logged in, display username -->
+                <a id="userName" class="nav-link ms-2 navTopic" href="profile.jsp"><%= userName %></a>
+                <%
+                } else {
+                %>
+                <!-- User is not logged in, show Login/Register -->
+                <a class="nav-link ms-2 navTopic " href="signin.jsp">Login/Register</a>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>
@@ -126,68 +142,11 @@
                     }
                 %>
 
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-1 best phone-card ">
-                    <div class="collection-img position-relative">
-                        <img src="images/Apple-iPhone-15-2.jpg" class="w-100 rounded-3" >
-                        <span
-                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center bg-dark p-1 rounded ">sale</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="rating mt-3">
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                        </div>
-                        <p class="text-capitalize my-1">Apple-iPhone-15</p>
-                        <span class="fw-bold">RS.224,900.00</span>
-                    </div>
-                </div>
 
 
 
 
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-1 best phone-card ">
-                    <div class="collection-img position-relative">
-                        <img src="images/Apple-iPhone-15-2.jpg" class="w-100 rounded-3" >
-                        <span
-                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center bg-dark p-1 rounded ">sale</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="rating mt-3">
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                        </div>
-                        <p class="text-capitalize my-1">Apple-iPhone-15</p>
-                        <span class="fw-bold">RS.224,900.00</span>
-                    </div>
-                </div>
 
-
-
-
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-1 best phone-card ">
-                    <div class="collection-img position-relative">
-                        <img src="images/Apple-iPhone-15-2.jpg" class="w-100 rounded-3" >
-                        <span
-                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center bg-dark p-1 rounded ">sale</span>
-                    </div>
-                    <div class="text-center">
-                        <div class="rating mt-3">
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                            <span class="text-primary"><i class="fas fa-star"></i></span>
-                        </div>
-                        <p class="text-capitalize my-1">Apple-iPhone-15</p>
-                        <span class="fw-bold">RS.224,900.00</span>
-                    </div>
-                </div>
 
             </div>
 

@@ -1,16 +1,33 @@
-/* General navbar styling */
-.navbar-custom {
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400");
+body {
+    font-family: "Raleway", sans-serif !important;
+    font-size: 1rem;
+
+
 }
 
-.navbar-custom .navbar-brand {
+/* General navbar styling */
+.navbar-custom {
+    background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 0)); /* Gradient background */
+    padding: 1rem;
+    border-radius: 12px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); !* Subtle shadow *!*/
+}
+
+.logo{
     font-size: 1.5rem;
     font-weight: bold;
+    color: #ffc107 !important;
+
+}
+
+
+
+.navbar-custom .navbar-brand {
+    font-size: 1rem;
+    font-weight: bold;
     color: #fff;
-    text-transform: uppercase;
+
 }
 
 .navbar-custom .nav-link {
@@ -25,14 +42,14 @@
 
 /* Hover effect on links */
 .navbar-custom .nav-link:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.2); /* Transparent white background on hover */
+    color: rgba(0, 0, 0, 0.98);
+    background: #ffc107; /* Transparent white background on hover */
 }
 
 /* Active link styling */
 .navbar-custom .nav-link.active {
-    background: #f8f9fa;
-    color: #6a11cb;
+    background: #ffc107;
+    color: black;
     font-weight: bold;
 }
 

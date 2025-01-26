@@ -1,4 +1,4 @@
-<%@ page import="lk.ijse.ecommerce_web.Product" %>
+<%@ page import="lk.ijse.ecommerce_web.entity.Product" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
@@ -34,7 +34,7 @@
         }
 
     </style>--%>
-    <link rel="stylesheet" href="../assets/css/adminStyle.css">
+    <link rel="stylesheet" href="assets/css/adminStyle.css">
 
 </head>
 <body>
@@ -45,10 +45,10 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse d-flex" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../products">Products</a>
+                    <a class="nav-link active" href="../products">Products</a>
                 </li>
 
                 <li class="nav-item">
@@ -63,12 +63,11 @@
                     <a class="nav-link" href="orderDetailsServlet">Order Details</a>
                 </li>
 
-
-
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.jsp">User</a>
+                    <a class="nav-link" href="index.jsp">User</a>
                 </li>
             </ul>
+                 <a class=" logo ms-auto " href="#">SD TECH</a>
         </div>
     </div>
 </nav>

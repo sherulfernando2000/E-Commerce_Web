@@ -1,4 +1,4 @@
-package lk.ijse.ecommerce_web;
+package lk.ijse.ecommerce_web.entity;
 
 public class Customer {
        private int id;

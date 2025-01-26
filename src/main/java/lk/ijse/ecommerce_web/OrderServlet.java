@@ -28,7 +28,7 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, IOException {
         response.setContentType("application/json");
 
-        try {
+        try(Connection conn = dataSource.getConnection();) {
            /* // Parse JSON from request body
             StringBuilder sb = new StringBuilder();
             BufferedReader reader = request.getReader();
@@ -50,7 +50,7 @@ public class OrderServlet extends HttpServlet {
             int userId =   (int) session.getAttribute("userId");; // Replace with actual logged-in user ID
 
             // Insert into orders table
-            Connection conn = dataSource.getConnection();
+
             String insertOrderQuery = "INSERT INTO orders (userId, orderDate, total_amount) VALUES (?, NOW(), ?)";
             PreparedStatement psOrder = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
             psOrder.setInt(1, userId);

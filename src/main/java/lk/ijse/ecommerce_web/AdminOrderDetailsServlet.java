@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.ecommerce_web.entity.Order;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -26,12 +27,12 @@ import java.util.List;
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
-            try {
+            try(  Connection conn = dataSource.getConnection();) {
                 // Fetch orders from the database (replace with actual DAO logic)
                 List<Order> orders = new ArrayList<>();
 
                 // Database connection
-                Connection conn = dataSource.getConnection();
+
                 String sql = "SELECT o.id AS orderId, \n" +
                         "       u.userName AS customerName, \n" +
                         "       o.orderDate, \n" +

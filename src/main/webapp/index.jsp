@@ -48,6 +48,9 @@
             text-align: center;
             padding: 20px;
         }
+
+
+
     </style>
 
 </head>
@@ -81,8 +84,25 @@
                     </div>
 
                 </a>
-                <a class="nav-link  ms-2 navTopic" aria-current="page" href="signin.jsp">Login/Register</a>
-                <a class="nav-link  ms-2 navTopic" aria-current="page" href="products">admin</a>
+                <%--<a class="nav-link  ms-2 navTopic" aria-current="page" href="signin.jsp">Login/Register</a>
+                <a class="nav-link  ms-2 navTopic" aria-current="page" href="products">admin</a>--%>
+                <!-- Check session for user details -->
+                <%
+                    String userName = (String) session.getAttribute("userName");
+                    System.out.println("user"+userName);
+                    if (userName != null) {
+
+                %>
+                <!-- User is logged in, display username -->
+                <a id="userName" class="nav-link ms-2 navTopic" href="profile.jsp"><%= userName %></a>
+                <%
+                } else {
+                %>
+                <!-- User is not logged in, show Login/Register -->
+                <a class="nav-link ms-2 navTopic " href="signin.jsp">Login/Register</a>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>

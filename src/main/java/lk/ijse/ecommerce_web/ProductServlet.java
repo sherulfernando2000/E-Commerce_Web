@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import lk.ijse.ecommerce_web.entity.Product;
+
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;

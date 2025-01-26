@@ -7,9 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.ecommerce_web.entity.Product;
 
 import javax.sql.DataSource;
-import javax.swing.text.html.HTML;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

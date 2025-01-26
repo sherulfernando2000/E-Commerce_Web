@@ -28,25 +28,30 @@ public class SignInServlet extends HelloServlet {
 
         if (password != null && !password.isEmpty() && email != null && !email.isEmpty()) {
             try(Connection connection = dataSource.getConnection();) {
-                PreparedStatement pstm = connection.prepareStatement("select password,role,userId from users where email=?");
+                PreparedStatement pstm = connection.prepareStatement("select password,role,userId,userName from users where email=?");
                 pstm.setString(1, email);
 
 
                 ResultSet rs = pstm.executeQuery();
                 if (rs.next() ) {
                     Object userId = rs.getObject(3);
+                   Object userName = rs.getObject(4);
                     System.out.println("userId"+ userId);
+                    System.out.println("userId"+ userName);
+
                     if (password.equals(rs.getString(1))) {
                         if (rs.getString(2).equals("admin")) {
                             /*Object userId = rs.getObject(3);*/
                             System.out.println("userId"+ userId);
                             HttpSession session = req.getSession();     //new add 2 line
                             session.setAttribute("userId", userId);
+                            session.setAttribute("userName", userName);
 
                             resp.sendRedirect("products");  //admin/products.jsp?message=login successfully
                         }else{
                             HttpSession session = req.getSession();     //new add 2 line
                             session.setAttribute("userId", userId);
+                            session.setAttribute("userName", userName);
                             resp.sendRedirect("index.jsp?message=user login success");
                         }
 

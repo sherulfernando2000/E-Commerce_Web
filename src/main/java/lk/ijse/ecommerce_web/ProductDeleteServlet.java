@@ -25,9 +25,9 @@ public class ProductDeleteServlet extends HttpServlet {
         String idString = req.getParameter("id");
         int id = Integer.parseInt(idString);
 
-        Connection connection = null;
-        try {
-           connection = dataSource.getConnection();
+
+        try (Connection connection = dataSource.getConnection()){
+
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM products WHERE productId = ?");
             pstm.setInt(1, id);
             int i = pstm.executeUpdate();
@@ -43,8 +43,8 @@ public class ProductDeleteServlet extends HttpServlet {
 
         }finally {
             try {
-                connection.close();
-            } catch (SQLException e) {
+
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

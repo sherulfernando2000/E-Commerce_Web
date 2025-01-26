@@ -1,4 +1,4 @@
-package lk.ijse.ecommerce_web;
+package lk.ijse.ecommerce_web.entity;
 
 import java.util.Date;
 
