@@ -34,7 +34,7 @@ const fetchData = () => {$.ajax({
                                                     <h5 class="fw-normal mb-0">${product.quantity}</h5>
                                                 </div>
                                                 <div style="width: 80px;">
-                                                    <h6 class="mb-0" ><span>Rs.</span>${product.price}</h6>
+                                                    <h6 class="mb-0">Rs.</h6><h6 class="priceText">${product.price}</h6>
                                                 </div>
                                                 <a href="#!" class="delete-product" data-id="${product.productId}" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                             </div>
@@ -89,5 +89,108 @@ $(document).on("click", ".delete-product", function () {
             console.error("Error:", error);
             alert("An error occurred while removing the product.");
         }
+    });
+});
+
+
+// JavaScript: AJAX for Checkout
+$(document).on("click", ".checkoutBtn", function () {
+    const shippingCost = 0; // Shipping cost, if applicable
+
+    // Prepare order data
+    const orderData = {
+        items: [], // Product details from cart
+        totalAmount: 0 // Total amount for the order
+    };
+
+    // Collect cart items
+    $("#cardsBody .card").each(function () {
+        const product = {
+            productId: $(this).find(".delete-product").data("id"),
+            quantity: parseInt($(this).find(".fw-normal").text()),
+            price: parseFloat($(this).find(".priceText").text())
+        };
+        console.log(product.price+"+"+product.quantity+"+"+product.productId);
+        orderData.items.push(product);
+        orderData.totalAmount += product.price * product.quantity;
+    });
+
+    // Send data to backend
+    $.ajax({
+        url: "http://localhost:8080/E_Commerce_Web_war_exploded/order",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(orderData),
+        success: (resp) => {
+            console.log("Order placed successfully:", resp);
+
+            // Show success message
+            alert("Your order has been placed successfully!");
+
+            // Clear the cart
+            $("#cardsBody").empty();
+            $(".subtotal-amount, .total-amount").text("Rs. 0.00");
+        },
+        error: (xhr, status, error) => {
+            console.error("Error placing order:", xhr.responseText);
+            alert("Failed to place the order. Please try again.");
+        }
+    });
+});
+
+$(document).ready(function () {
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+
+        const searchQuery = $("#searchInput").val();
+
+        $.ajax({
+            url: "ProductSearchServlet", // Servlet URL
+            type: "GET",
+            data: { query: searchQuery },
+            dataType: "json",
+            success: function (response) {
+                let productsHtml = "";
+
+                if (response.length > 0) {
+                    response.forEach(product => {
+                        productsHtml += `
+                                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-3 best phone-card">
+                                    <div class="collection-img position-relative">
+                                        <img src="${product.imagePath}" class="w-100 rounded-3">
+                                        <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center bg-dark p-1 rounded">Sale</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="rating mt-3">
+                                            <span class="text-primary"><i class="fas fa-star"></i></span>
+                                            <span class="text-primary"><i class="fas fa-star"></i></span>
+                                            <span class="text-primary"><i class="fas fa-star"></i></span>
+                                            <span class="text-primary"><i class="fas fa-star"></i></span>
+                                            <span class="text-primary"><i class="fas fa-star"></i></span>
+                                        </div>
+                                        <p class="text-capitalize my-1">${product.name}</p>
+                                        <span class="fw-bold">Rs. ${product.price}</span>
+                                        <div id="counter">
+                                            <button id="decrease-${product.productId}" class="btn-counter rounded-circle">-</button>
+                                            <span id="display-${product.productId}">0</span>
+                                            <button id="increase-${product.productId}" class="btn-counter rounded-circle">+</button>
+                                        </div>
+                                        <button type="button" class="btn-addToCart mt-1 rounded" onclick="addToCart('${product.productId}')">Add to cart</button>
+                                    </div>
+                                </div>
+                            `;
+                    });
+                } else {
+                    productsHtml = "<p>No products found.</p>";
+                }
+
+                // Replace the productContainer content
+                $("#productContainer").html(productsHtml);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error occurred:", error);
+                $("#productContainer").html("<p>An error occurred while fetching products.</p>");
+            }
+        });
     });
 });

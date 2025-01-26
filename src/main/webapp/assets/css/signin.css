@@ -102,6 +102,20 @@ h2, h3, p {
 
 }
 
+.checkoutBox{
+    background-color: black;
+    border: 5px solid #ffc107;
+}
+
+.checkoutBtn{
+    background-color: #ffc107 !important;
+}
+
+.checkoutBtn:hover{
+    background-color: #29ca29 !important;
+}
+
+
 /* Footer Links */
 a {
     text-decoration: none;
@@ -112,6 +126,13 @@ a:hover {
     text-decoration: underline;
     color: #e0a800;
 }
+
+
+
+
+
+
+
 
 /* Responsiveness */
 @media (max-width: 768px) {

@@ -91,13 +91,13 @@
 <!-- Header -->
 <header id="header" class="vh-100 carousel slide" data-bs-ride="carousel">
     <div class="container h-100 d-flex align-items-center carousel-inner overflow-hidden">
-        <div class="text-center text-card carousel-item active">
+        <div class="text-center text-card carousel-item active ShopNow">
             <h2 class="text-white">Best collection</h2>
             <h1 class="text-white">New Arrivals</h1>
             <a href="#" class="btn mt-3 text-uppercase">shop now</a>
         </div>
 
-        <div class="text-center text-card carousel-item ">
+        <div class="text-center text-card carousel-item  ShopNow">
             <h2 class="text-white">Best Price</h2>
             <h1 class="text-white"> More Offers</h1>
             <a href="#" class="btn mt-3 text-uppercase">Buy now</a>
@@ -191,7 +191,7 @@
         </video>
 
         <div class="content">
-            <h1>Welcome to SD TECH</h1>
+            <h1  style="color: #e8b24a !important;">Welcome to SD TECH</h1>
             <p>your premier destination for corporate mobile solutions in Sri Lanka!</p>
         </div>
     </div>

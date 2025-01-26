@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+    <%--<style>
         #dropZone {
             transition: border-color 0.3s ease, background-color 0.3s ease;
         }
@@ -33,12 +33,13 @@
             background-color: #e8b24a;
         }
 
-    </style>
+    </style>--%>
+    <link rel="stylesheet" href="../assets/css/adminStyle.css">
 
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Admin Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,14 +48,23 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="products.jsp">Products</a>
+                    <a class="nav-link" href="../products">Products</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/customers.jsp">Customers</a>
+                    <a class="nav-link" href="customers">Customers</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="admin/orders.jsp">Order Details</a>
+                    <a class="nav-link" href="categories">Categories</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="orderDetailsServlet">Order Details</a>
+                </li>
+
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="../index.jsp">User</a>
                 </li>

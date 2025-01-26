@@ -8,6 +8,7 @@ public class Product {
     private   int categoryId;
     private   String description;
     private   String image_path;
+    private String categoryDescription;
 
     public Product() {}
 
@@ -20,6 +21,16 @@ public class Product {
         this.description = description;
         this.image_path = image_path;
     }
+    public Product(int id, String name, double price, int quantity, String categoryDescription, String description, String image_path) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.categoryDescription = categoryDescription;
+        this.description = description;
+        this.image_path = image_path;
+    }
+
 
     public int getId() {
         return id;

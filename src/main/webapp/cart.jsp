@@ -19,6 +19,7 @@
           integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/components/registrations/registration-9/assets/css/registration-9.css">
+    <link rel="stylesheet" href="assets/css/signin.css">
     <style>
         .fa-trash-alt:hover{
             color: red;
@@ -202,10 +203,10 @@
                             </div>
                             <div class="col-lg-5">
 
-                                <div class="card bg-primary text-white rounded-3">
+                                <div class="card text-white rounded-3 checkoutBox">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center mb-4">
-                                            <h5 class="mb-0 text-center">PAYMENTS</h5>
+                                            <h5 class="mb-0 text-center" style="color: #e8b24a">PAYMENTS</h5>
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
                                                  class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
                                         </div>
@@ -229,7 +230,7 @@
                                             <p class="mb-2 total-amount">4818.00</p>
                                         </div>
 
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-block btn-lg checkoutBtn">
                                             <div class="d-flex justify-content-between">
 
                                                 <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>

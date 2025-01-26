@@ -1,4 +1,6 @@
-<%--
+<%@ page import="lk.ijse.ecommerce_web.Category" %>
+<%@ page import="java.util.List" %>
+<%@ page import="lk.ijse.ecommerce_web.Customer" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
   Date: 1/19/2025
@@ -26,14 +28,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="products.jsp">Products</a>
+                    <a class="nav-link" href="../products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="customers.jsp">Customers</a>
+                    <a class="nav-link active" href="customers">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="orders.jsp">Order Details</a>
+                    <a class="nav-link" href="categories">Categories</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="orderDetailsServlet">Order Details</a>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -42,29 +49,7 @@
 <!-- Customer Management Section -->
 <div class="container mt-5">
     <h1 class="text-center">Customer Management</h1>
-    <form action="CustomerController" method="POST" id="customerForm">
-        <div class="mb-3">
-            <label for="customerId" class="form-label">Customer ID</label>
-            <input type="text" class="form-control" id="customerId" name="customerId" required>
-        </div>
-        <div class="mb-3">
-            <label for="customerName" class="form-label">Name</label>
-            <input type="text" class="form-control" id="customerName" name="customerName" required>
-        </div>
-        <div class="mb-3">
-            <label for="customerEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
-        </div>
-        <div class="mb-3">
-            <label for="customerPhone" class="form-label">Phone Number</label>
-            <input type="text" class="form-control" id="customerPhone" name="customerPhone" required>
-        </div>
-        <div class="d-flex justify-content-between">
-            <button type="submit" name="action" value="save" class="btn btn-success">Save</button>
-            <button type="submit" name="action" value="update" class="btn btn-warning">Update</button>
-            <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
-        </div>
-    </form>
+
 
     <!-- Customer List Table -->
     <div class="mt-5">
@@ -75,12 +60,31 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody id="customerTableBody">
             <!-- Customer rows will be dynamically added here -->
+            <%
+                List<Customer> dataList = (List<Customer>) request.getAttribute("customers");
+                if (dataList != null && !dataList.isEmpty()) {
+                    for (Customer customer : dataList) {
+            %>
+            <tr>
+                <td><%= customer.getId() %></td>
+                <td><%= customer.getUserName() %></td>
+                <td><%= customer.getEmail() %></td>
+
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editCategory('<%= customer.getId() %>', '<%= customer.getUserName() %>')">Edit</button>
+                    <button type="button" class="btn btn-danger" id="deleteProduct">Delete</button>
+                </td>
+            </tr>
+            <%
+                    }
+                }
+            %>
+
             </tbody>
         </table>
     </div>
@@ -89,30 +93,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // JavaScript to handle dynamic customer list
-    const customers = [
-        { id: 'C001', name: 'John Doe', email: 'john@example.com', phone: '1234567890' },
-        { id: 'C002', name: 'Jane Smith', email: 'jane@example.com', phone: '0987654321' }
-    ];
 
-    function loadCustomerTable() {
-        const tableBody = document.getElementById('customerTableBody');
-        tableBody.innerHTML = '';
-        customers.forEach((customer, index) => {
-            const row = `
-                    <tr>
-                        <td>${customer.id}</td>
-                        <td>${customer.name}</td>
-                        <td>${customer.email}</td>
-                        <td>${customer.phone}</td>
-                        <td>
-                            <button class="btn btn-warning btn-sm" onclick="editCustomer(${index})">Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteCustomer(${index})">Delete</button>
-                        </td>
-                    </tr>
-                `;
-            tableBody.innerHTML += row;
-        });
-    }
 
     function editCustomer(index) {
         const customer = customers[index];

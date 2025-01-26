@@ -35,17 +35,24 @@
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <form class="d-flex m-0">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+
+
         <div class="collapse navbar-collapse  justify-content-end " id="navbarNavAltMarkup">
             <div class="navbar-nav position-relative d-flex justify-content-around">
 
-                <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link " aria-current="page" href="index.jsp">Home</a>
+                <a class="nav-link active" href="#">Products</a>
 
                 <a class="nav-link" href="#">About us</a>
                 <a class="nav-link" href="#">Blog</a>
                 <a class="nav-link" href="cart.jsp">
                     <div class="d-flex align-items-center" style="background-color:#212529">
-                        <button type="button" class="btn-position-relative cart" style="background-color: #212529">
+                        <button type="button" class="btn-position-relative cart mt-1" style="background-color: #212529">
                             <i class="fa fa-shopping-cart " style="color: white; background-color: #212529"></i>
                             <span class="position-absolute top-0" style="color: white">5</span>
 
@@ -58,6 +65,9 @@
         </div>
     </div>
 </nav>
+
+
+
 
 <!-- collection -->
 <section id="collection" class="py-5">
@@ -85,7 +95,7 @@
 
 
             <%--Card with for loop--%>
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-1  best phone-card ">
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2 m-3  best phone-card ">
                     <div class="collection-img position-relative">
                         <img src="<%=product.getImage_path()%>" class="w-100 rounded-3" >
                         <span class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center bg-dark p-1 rounded ">sale</span>
@@ -186,6 +196,75 @@
     </div>
 </section>
 <!-- end of collection -->
+
+
+<!-- special products -->
+<section id = "special" class = "py-5">
+    <div class = "container">
+        <div class = "title text-center py-5">
+            <h2 class = "position-relative d-inline-block">Special Offers</h2>
+        </div>
+
+        <div class = "special-list row g-0">
+            <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class = "special-img position-relative overflow-hidden">
+                    <img src = "images/Apple-iPhone-16-1.png" class = "w-100">
+                    <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                </div>
+                <div class = "text-center">
+                    <p class = "text-capitalize mt-3 mb-1">Apple-iPhone-16</p>
+                    <span class = "fw-bold d-block"><s>Rs.249000</s><span>Rs.229000</span></span>
+                    <a href = "#" class = "btn  mt-3">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class = "special-img position-relative overflow-hidden">
+                    <img src = "images/Samsung-Galaxy-F05.jpg" class = "w-100">
+                    <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                </div>
+                <div class = "text-center">
+                    <p class = "text-capitalize mt-3 mb-1">Samsung-Galaxy-F05</p>
+                    <span class = "fw-bold d-block"><s>Rs.149000</s><span>Rs.130000</span></span>
+                    <a href = "#" class = "btn  mt-3">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class = "special-img position-relative overflow-hidden">
+                    <img src = "images/Samsung-Galaxy-S24-FE.png" class = "w-100">
+                    <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                </div>
+                <div class = "text-center">
+                    <p class = "text-capitalize mt-3 mb-1">Samsung-Galaxy-S24</p>
+                    <span class = "fw-bold d-block"><s>Rs.289000</s><span>Rs.270000</span></span>
+                    <a href = "#" class = "btn  mt-3">Add to Cart</a>
+                </div>
+            </div>
+
+            <div class = "col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class = "special-img position-relative overflow-hidden">
+                    <img src = "images/Apple-iPhone-15-2.jpg" class = "w-100">
+                    <span class = "position-absolute d-flex align-items-center justify-content-center text-primary fs-4">
+                            <i class = "fas fa-heart"></i>
+                        </span>
+                </div>
+                <div class = "text-center">
+                    <p class = "text-capitalize mt-3 mb-1">Apple-iPhone-15</p>
+                    <span class = "fw-bold d-block"><s>Rs.289000</s><span>Rs.279000</span></span>
+                    <a href = "#" class = "btn mt-3">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of special products -->
 
 
 <!-- footer -->

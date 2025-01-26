@@ -1,4 +1,5 @@
-<%--
+<%@ page import="lk.ijse.ecommerce_web.Order" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Sonali
   Date: 1/19/2025
@@ -25,14 +26,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="products.jsp">Products</a>
+                    <a class="nav-link" href="products">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="customers.jsp">Customers</a>
+                    <a class="nav-link" href="customers">Customers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="orders.jsp">Order Details</a>
+                    <a class="nav-link" href="categories">Categories</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="orderDetailsServlet">Order Details</a>
+                </li>
+
             </ul>
         </div>
     </div>
@@ -53,7 +58,7 @@
         </tr>
         </thead>
         <tbody>
-       <%-- <%
+        <%
             // Simulate retrieving order data
             List<Order> orders = (List<Order>) request.getAttribute("orderList");
             if (orders != null && !orders.isEmpty()) {
@@ -64,10 +69,10 @@
             <td><%= order.getCustomerName() %></td>
             <td><%= order.getOrderDate() %></td>
             <td><%= order.getTotalAmount() %></td>
-            <td><%= order.getStatus() %></td>
+            <td><%= order.getProductName() %></td>
             <td>
-                <a href="viewOrderDetails.jsp?orderId=<%= order.getOrderId() %>" class="btn btn-primary btn-sm">View</a>
-                <a href="deleteOrder.jsp?orderId=<%= order.getOrderId() %>" class="btn btn-danger btn-sm">Delete</a>
+
+                <a href="deleteOrder.jsp?orderId=<%= order.getOrderId() %>" class="btn btn-danger btn-sm">Cancel</a>
             </td>
         </tr>
         <%
@@ -79,7 +84,7 @@
         </tr>
         <%
             }
-        %>--%>
+        %>
         </tbody>
     </table>
 </div>
